@@ -11,7 +11,11 @@ environment_variables:
         description: "Timeout for UV processing in seconds."
         default: "60000"
         required: false
-
+    LLM_RESPONSE_LANGUAGE:
+        description: "Language for responses (e.g., English, Spanish, Korean ..)."
+        default: "English"
+        required: false
+        
 runtimes:
   - editor: JupyterLab
     kernel: Python 3.10

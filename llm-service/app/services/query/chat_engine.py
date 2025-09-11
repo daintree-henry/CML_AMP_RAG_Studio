@@ -65,11 +65,19 @@ from .. import llm_completion, models
 
 logger = logging.getLogger(__name__)
 
+LLM_RESPONSE_LANGUAGE = os.getenv("LLM_RESPONSE_LANGUAGE", "English")
+
 CUSTOM_CONTEXT_PROMPT_TEMPLATE = """\
 The following is a friendly conversation between a user and an AI assistant. \
 The assistant is talkative and provides lots of specific details from its context. \
 If the assistant does not know the answer to a question, it truthfully says it \
 does not know. 
+
+"""
++
+"You must answer in " + LLM_RESPONSE_LANGUAGE
++
+"""
 
 As the assistant, please provide an answer based solely on the provided sources with \
 citations to the paragraphs. When referencing information from a source, \
@@ -114,6 +122,12 @@ The following is a friendly conversation between a user and an AI assistant. \
 The assistant is talkative and provides lots of specific details from its context. \
 If the assistant does not know the answer to a question, it truthfully says \
 it does not know.
+
+"""
++
+"You must answer in " + LLM_RESPONSE_LANGUAGE
++
+"""
 
 As the assistant, please provide an answer based solely on the provided sources with \
 citations to the paragraphs. When referencing information from a source, \
@@ -164,6 +178,12 @@ CUSTOM_CONDENSE_TEMPLATE = """\
 Given a conversation (between Human and Assistant) and a follow up message from Human, \
 rewrite the message to be a standalone question that captures all relevant context \
 from the conversation. Just provide the question, not any description of it.
+
+"""
++
+"You must answer in " + LLM_RESPONSE_LANGUAGE
++
+"""
 
 <Chat History>
 {chat_history}
