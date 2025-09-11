@@ -36,6 +36,7 @@
 #  DATA.
 #
 import logging
+import os
 from typing import Optional
 
 from . import models
@@ -48,12 +49,14 @@ from .metadata_apis import session_metadata_api
 logger = logging.getLogger(__name__)
 
 LLM_RESPONSE_LANGUAGE = os.getenv("LLM_RESPONSE_LANGUAGE", "English")
-RENAME_SESSION_PROMPT_TEMPLATE = """
+RENAME_SESSION_PROMPT_TEMPLATE = f"""
 You are tasked with suggesting an apt name for a chat session based on its first interaction between a User and an Assistant. 
 
 # Instructions
 IMPORTANTLY, ONLY RETURN THE NAME OF THE SESSION.  Only return a single line and sessions name, without any additional text or formatting.
 Use the below interactions as a guide but do not include them in your response.
+
+Please answer in {LLM_RESPONSE_LANGUAGE} whenever possible.
 
 ### Example 1:
 First Interaction:
@@ -96,8 +99,8 @@ def rename_session(session_id: int, user_name: Optional[str]) -> str:
     first_interaction = chat_history[0].rag_message
     session_metadata = session_metadata_api.get_session(session_id, user_name)
     llm = models.LLM.get(session_metadata.inference_model)
-    prompt = f"You must answer in {LLM_RESPONSE_LANGUAGE}.\n"
-    prompt += RENAME_SESSION_PROMPT_TEMPLATE.format(
+    
+    prompt = RENAME_SESSION_PROMPT_TEMPLATE.format(
         first_interaction.user,
         first_interaction.assistant,
     )
