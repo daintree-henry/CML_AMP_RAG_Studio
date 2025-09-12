@@ -44,10 +44,12 @@ import { useEffect } from "react";
 import { getAmpConfigQueryOptions } from "src/api/ampMetadataApi.ts";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import ToolsPage from "pages/Tools/ToolsPage.tsx";
+import ChatSettingsPage from "pages/ChatSettings/ChatSettingsPage.tsx";
 
 const modelConfigKey = "modelConfiguration";
 const ampSettingsKey = "ampSettings";
 const toolsKey = "tools";
+const chatSettingsKey = "chatSettings";
 
 const SettingsNavigation = () => {
   const navigate = useNavigate();
@@ -77,6 +79,12 @@ const SettingsNavigation = () => {
       key: toolsKey,
       label: "Tools",
       children: <ToolsPage />,
+      disabled: !config?.is_valid_config,
+    },
+    {
+      key: chatSettingsKey,
+      label: "Chat Settings",
+      children: <ChatSettingsPage />,
       disabled: !config?.is_valid_config,
     },
   ];
