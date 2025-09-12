@@ -105,10 +105,10 @@ which occurs in the evening<a class="rag_citation" href="2"></a>.
 Now it's your turn. Below are several numbered sources of information:
 
 <Contexts>
-{context_str}
+{{context_str}}
 
 <Query>
-{query_str}
+{{query_str}}
 
 <Answer>
 """
@@ -151,7 +151,7 @@ which occurs in the evening<a class="rag_citation" href="2"></a>.
 Now it's your turn. We have provided an existing answer: 
 
 <Existing Answer>
-{existing_answer}
+{{existing_answer}}
 
 Below are several numbered sources of information.
 Use them to refine the existing answer.
@@ -159,10 +159,10 @@ If the provided sources are not helpful, you will repeat the existing answer.
 Begin refining!
 
 <Contexts>
-{context_msg}
+{{context_msg}}
 
 <Query>
-{query_str}
+{{query_str}}
 
 <Answer>
 """
@@ -175,10 +175,10 @@ from the conversation. Just provide the question, not any description of it.
 Please answer in {LLM_RESPONSE_LANGUAGE} whenever possible.
 
 <Chat History>
-{chat_history}
+{{chat_history}}
 
 <Follow Up Message>
-{question}
+{{question}}
 
 <Standalone question>
 """

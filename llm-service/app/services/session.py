@@ -81,8 +81,8 @@ Facts about the Moon
 # Your turn:
 First Interaction:
 ```
-User: {}
-Assistant: {}
+User: {{}}
+Assistant: {{}}
 ```
 
 Session Name: 
