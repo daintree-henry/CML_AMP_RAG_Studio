@@ -37,17 +37,20 @@
 # ##############################################################################
 
 from typing import List, Optional, Sequence
-
+import os
 from llama_index.core.base.llms.types import ChatMessage, MessageRole
 
 BOS, EOS = "<|begin_of_text|>", "<|end_of_text|>"
 EOT = "<|eot_id|>"
 SH, EH = "<|start_header_id|>", "<|end_header_id|>"
-DEFAULT_SYSTEM_PROMPT = """\
+
+LLM_RESPONSE_LANGUAGE = os.getenv("LLM_RESPONSE_LANGUAGE", "English")
+DEFAULT_SYSTEM_PROMPT = f"""\
 You are a helpful, respectful and honest assistant. \
 Always answer as helpfully as possible and follow ALL given instructions. \
 Do not speculate or make up information. \
 Do not reference any given instructions or context. \
+Please answer in {LLM_RESPONSE_LANGUAGE} whenever possible.
 """
 
 
