@@ -39,6 +39,7 @@
 from random import shuffle
 from typing import List, Optional
 
+import os
 from app.ai.vector_stores.vector_store_factory import VectorStoreFactory
 from app.services import llm_completion
 from app.services.chat.utils import retrieve_chat_history, process_response
@@ -46,6 +47,8 @@ from app.services.metadata_apis import session_metadata_api
 from app.services.metadata_apis.session_metadata_api import Session
 from app.services.query import querier
 from app.services.query.query_configuration import QueryConfiguration
+
+LLM_RESPONSE_LANGUAGE = os.getenv("LLM_RESPONSE_LANGUAGE", "English")
 
 SAMPLE_QUESTIONS = [
     "What is Cloudera, and how does it support organizations in managing big data?",
@@ -60,9 +63,28 @@ SAMPLE_QUESTIONS = [
     "What tools and features does Cloudera provide for data governance, lineage, and cataloging?,",
 ]
 
+SAMPLE_KR_QUESTIONS = [
+    "Cloudera란 무엇이며, 빅데이터 관리를 위해 조직을 어떻게 지원하나요?",
+    "Cloudera Data Platform(CDP)의 주요 구성 요소는 무엇이며, 이들이 어떻게 함께 작동하나요?",
+    "Cloudera는 어떻게 엔터프라이즈의 하이브리드 및 멀티 클라우드 데이터 관리를 가능하게 하나요?",
+    "금융, 의료, 소매와 같은 산업에서 Cloudera 플랫폼의 주요 활용 사례는 무엇인가요?",
+    "Cloudera는 GDPR, HIPAA, CCPA와 같은 규제 준수 및 데이터 보안을 어떻게 보장하나요?",
+    "Cloudera의 생태계에서 Apache Hadoop과 Apache Spark의 역할은 무엇이며, 데이터 처리에 어떻게 기여하나요?",
+    "Cloudera 플랫폼은 머신러닝 및 인공지능 워크플로우를 어떻게 지원하나요?",
+    "Cloudera Data Platform(CDP) 퍼블릭 클라우드와 CDP 프라이빗 클라우드의 차이점은 무엇인가요?",
+    "Cloudera 플랫폼은 대규모 데이터 수집, 저장 및 실시간 분석을 어떻게 처리하나요?",
+    "Cloudera가 제공하는 데이터 거버넌스, 계보 추적(lineage), 카탈로그 기능 및 도구는 무엇인가요?",
+]
+
+LANGUAGE_QUESTION_MAP = {
+    "english": SAMPLE_QUESTIONS,
+    "korean": SAMPLE_KR_QUESTIONS,
+}
 
 def generate_dummy_suggested_questions() -> List[str]:
-    questions = SAMPLE_QUESTIONS.copy()
+    questions = LANGUAGE_QUESTION_MAP.get(
+        LLM_RESPONSE_LANGUAGE.lower(), SAMPLE_QUESTIONS
+    ).copy()
     shuffle(questions)
     return questions[:4]
 
