@@ -79,7 +79,7 @@ const EmptyChatState = () => {
         preview={false}
       />
       <Typography.Title level={4} style={{ fontWeight: 300, margin: 0 }}>
-        Welcome to RAG Studio
+        농협손해보험 보험 약관 챗봇
       </Typography.Title>
       <SuggestedQuestionsCards />
       <NoDataSourcesState />
