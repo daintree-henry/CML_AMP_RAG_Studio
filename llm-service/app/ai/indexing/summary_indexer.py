@@ -80,7 +80,8 @@ from ...services.models import ModelSource
 
 logger = logging.getLogger(__name__)
 
-SUMMARY_PROMPT = "Summarize the contents into less than 100 words."
+LLM_RESPONSE_LANGUAGE = os.getenv("LLM_RESPONSE_LANGUAGE", "English")
+SUMMARY_PROMPT = "Summarize the contents into less than 100 words. Please answer in {LLM_RESPONSE_LANGUAGE} whenever possible."
 
 # Since we don't use anything fancy to store the summaries, it's possible that two threads
 # try to do a write operation at the same time and we end up with a race condition.
