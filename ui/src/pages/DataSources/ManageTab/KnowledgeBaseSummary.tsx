@@ -80,7 +80,7 @@ const KnowledgeBaseSummary = ({
   return (
     <Card
       style={{ width: "100%" }}
-      title="Knowledge Base Summary"
+      title="Knowledge Base 요약"
       loading={dataSourceSummary.isLoading}
     >
       <Typography.Text>
